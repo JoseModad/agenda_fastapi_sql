@@ -1,0 +1,21 @@
+body {
+    background-color: aqua;
+}
+
+
+
+.titulo {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.btn.btn-success.crear {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 150px;
+    height: 40px;
+}
+
+.btn.btn-success i, .btn.btn-primary i {
+    margin-right: 10px;
+}
