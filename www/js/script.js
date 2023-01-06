@@ -24,8 +24,7 @@ async function CrearCargar() {
         }
 
         tdOpc = document.createElement("td");
-        tdOpc.innerHTML = 
-        <button class = "btn btn-danger" onclick = "EliminarContactoAgenda(this)"><i class = "far fa-trash-alt"></i></button> ;
+        tdOpc.innerHTML = '<button class = "btn btn-danger" onclick = "EliminarContactoAgenda(this)"><i class = "far fa-trash-alt"></i></button> ';        
         tr.appendChild(tdOpc);
         tabla.appendChild(tr)
     }
@@ -33,22 +32,22 @@ async function CrearCargar() {
 
 
 function EliminarContactoAgenda(btn) {
-    let file = btn.parentNode.parentNode;
+    let fila = btn.parentNode.parentNode;
     let id = fila.firstElementChild.innerHTML;
     let url = "http://127.0.0.1:8000/agenda/";
     alertify.confirm("Se eliminara el contacto de la agenda con el id" + id + "",
-    function() {
-        fetch(url + id, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
-            .catch(err => console.error["Error: ", error])
-            .then(response => console.log("Exito:", response))
-            .then(()=> location.reload())
-        alertify.success("Borrado");
+        function() {
+            fetch(url + id, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .catch(err => console.error("Error: ", error))
+                .then(response => console.log("Exito:", response))
+                .then(()=> location.reload())
+            alertify.success("Borrado");
 
-    }),
-    function () {
-        alertify.error("Cancelado")
-    }
+        },
+        function () {
+            alertify.error("Cancelado")
+        })
 }
