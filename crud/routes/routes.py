@@ -55,7 +55,7 @@ def Crear_contacto_agenda(db: Session, agend: AgendaEntrada):
     db.refresh(tblAgenda)
     return tblAgenda
 
-@agenda.post("/agenda/{codigo}", tags = ["Agenda"], response_model = AgendaEntrada)
+@agenda.post("/agenda/", tags = ["Agenda"], response_model = AgendaEntrada)
 def Crear_Contacto(agend: AgendaEntrada, db: Session = Depends(get_db)):
     return Crear_contacto_agenda(db = db, agend = agend)
         
@@ -69,7 +69,7 @@ def eliminar_Contacto_Agenda(db: Session, codigo: int):
 
 
 @agenda.delete("/agenda/{codigo}", tags = ["Agenda"])
-def eliminar_Contacto(codigo: int, db: Session = Depends(get_db)):
+def Eliminar_Contacto(codigo: int, db: Session = Depends(get_db)):
     tblAgenda = leer_contacto(db, codigo = codigo)
     if not tblAgenda:
         raise HTTPException(status_code = 404, detail = "No se encontro ningun contacto para eliminar")

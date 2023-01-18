@@ -1,6 +1,6 @@
 document.body.style.zoom = "90%";
 
-async function CargarAgendaGet(url) {
+async function CargarAgendaGET(url) {
     let contactos = await fetch(url)
     .then(res => res.json())
     .then((agenda) => {
@@ -11,7 +11,7 @@ async function CargarAgendaGet(url) {
 }
 
 async function CrearCargar() {
-    let contactosAgenda = await CargarAgendaGet("http://127.0.0.1:8000/agenda/")
+    let contactosAgenda = await CargarAgendaGET("http://127.0.0.1:8000/agenda/")
 
     let tabla = document.getElementById("tbody");
     for (let k in contactosAgenda) {
@@ -24,11 +24,36 @@ async function CrearCargar() {
         }
 
         tdOpc = document.createElement("td");
-        tdOpc.innerHTML = '<button class = "btn btn-danger" onclick = "EliminarContactoAgenda(this)"><i class = "far fa-trash-alt"></i></button> ';        
+        tdOpc.innerHTML = '<button class = "btn btn-danger" onclick = "EliminarContactoAgenda(this)"><i class = "far fa-trash-alt"></i></button>';        
         tr.appendChild(tdOpc);
         tabla.appendChild(tr)
     }
 }
+
+async function CrearContactoPOST() {
+    let nombre = document.getElementById("Nombre").value;
+    let telefono = document.getElementById("Telefono").value;
+    let correo = document.getElementById("Correo").value;
+
+    contactoAgenda = {}
+    contactoAgenda.nombre = nombre;
+    contactoAgenda.telefono = telefono;
+    contactoAgenda.correo = correo;
+
+    let url = "http://127.0.0.1:8000/agenda/";
+
+    await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(contactoAgenda),
+        headers: {
+            "Content-Type": "application/json"
+
+        }
+    }).then(res => res.json())
+    .catch(error => console.error("Error: ", error))
+    .then(response => console.log("Exito:", response));
+}
+
 
 
 function EliminarContactoAgenda(btn) {
